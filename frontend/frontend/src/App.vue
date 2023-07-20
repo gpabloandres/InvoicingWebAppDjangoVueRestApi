@@ -9,6 +9,14 @@
         <div class="navbar-end">
           <template v-if="$store.state.isAuthenticated">
             <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
+            <router-link to="/dashboard/clients" class="navbar-item">Clients</router-link>
+            
+            <div class="navbar-item"> 
+              <div class="buttons">
+                <router-link to="/dashboard/my-account" class="button is-light">My account</router-link>
+              </div>
+            </div>
+          
           </template>
         
           <template v-else>
@@ -24,14 +32,14 @@
         </div>
       </div>
     </nav>
-  </div>  
-  <section class="section">
-    <router-view/>
-  </section>
+    <section class="section">
+      <router-view/>
+    </section>
 
-  <footer class="footer">
-    <p class="has-text-centered">Copyright (c) 2023</p>
-  </footer>
+    <footer class="footer">
+      <p class="has-text-centered">Copyright (c) 2023</p>
+    </footer>
+  </div>  
 </template>
 
 <script>
@@ -45,9 +53,9 @@
       const token = this.$store.state.token
 
       if (token) {
-        axios.defaults.headers.common['Authorization'] = "Token" + token
+        axios.defaults.headers.common['Authorization'] = 'Token ' + token
       } else {
-        axios.defaults.headers.common['Authorization'] = ""
+        axios.defaults.headers.common['Authorization'] = ''
       }
     }
   }
