@@ -3,6 +3,7 @@
         <h1 class="title">My account</h1>
 
         <div class="buttons">
+            <router-link to="/dashboard/my-account/edit-team" class="button is-light">Edit team</router-link>
             <button v-on:click="logout()" class="button is-danger">Log out</button>
         </div>
     </div>   

@@ -3,6 +3,8 @@
         <div class="columns is-multiline">
             <div class="column is-12">
                 <h1 class="title">Clients</h1>
+            
+                <router-link :to="{ name: 'AddClient' }" class="button is-light mt-4">Add client</router-link>
             </div>
 
             <div
@@ -13,7 +15,7 @@
                 <div class="box">
                     <h3 class="is-size-4 mb-4">{{ client.name }}</h3>
 
-                    <button>Details</button>
+                    <router-link :to="{ name: 'Client', params: { id: client.id }}" class="button is-light">Details</router-link>
                 </div>
             </div>
         </div>
