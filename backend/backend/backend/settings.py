@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     
     'client.apps.ClientConfig',
     'team.apps.TeamConfig',
+    'invoice.apps.InvoiceConfig',
 ]
 
 MIDDLEWARE = [
