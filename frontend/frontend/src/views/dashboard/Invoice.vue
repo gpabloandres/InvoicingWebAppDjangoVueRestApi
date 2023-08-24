@@ -5,8 +5,8 @@
                 <h1 class="title">Invoice - {{ invoice.invoice_number }}</h1>
             </div>
 
-            <div class="column is-12">
-                <h3 class="is-size-4">Items</h3>
+            <div class="column is-12 mb-4">
+                <h3 class="is-size-4 mb-5">Client</h3>
 
                 <p><strong>{{ invoice.client_name }}</strong></p>
                     
@@ -14,7 +14,11 @@
                 <p v-if="invoice.client_address2">{{ invoice.client_address2 }}</p>
                 <p v-if="invoice.client_zipcode || invoice.client_place">{{ invoice.client_zipcode }} {{ invoice.client_place }}</p>
                 <p v-if="invoice.client_country">{{ invoice.client_country }}</p>
-                
+            </div>
+
+            <div class="column is-12 mb-4">
+                <h3 class="is-size-4 mb-5">Items</h3>
+
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
@@ -51,9 +55,8 @@
                 items: []
             }
         },
-        async mounted() {
-            await this.getInvoice()
-            await this.getItems()
+        mounted() {
+            this.getInvoice()
         },
         methods: {
             getInvoice() {
@@ -63,18 +66,6 @@
                     .get(`/api/v1/invoices/${invoiceID}`)
                     .then(response => {
                         this.invoice = response.data
-                    })
-                    .catch(error => {
-                        console.log(JSON.stringify(error))
-                    })
-            },
-            getItems() {
-                const invoiceID = this.$route.params.id
-
-                axios
-                    .get(`/api/v1/items/?invoice_id=${invoiceID}`)
-                    .then(response => {
-                        this.items = response.data
                     })
                     .catch(error => {
                         console.log(JSON.stringify(error))

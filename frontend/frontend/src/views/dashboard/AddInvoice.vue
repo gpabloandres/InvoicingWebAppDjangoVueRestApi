@@ -62,6 +62,7 @@
 
 <script>
 import axios from 'axios'
+
 import { toast } from 'bulma-toast'
 
 import ItemForm from '@/components/ItemForm.vue'
@@ -150,7 +151,7 @@ export default {
             this.invoice.client = this.invoice.client.id
 
             axios
-                .post('/api/v1/invoices/', this.invoice)
+                .post(`/api/v1/invoices/`, this.invoice)
                 .then(response => {
                     toast({
                         message: 'The invoice was added',
@@ -166,7 +167,6 @@ export default {
                 .catch(error => {
                     console.log(JSON.stringify(error))
                 })
-        
         }
     }
 }

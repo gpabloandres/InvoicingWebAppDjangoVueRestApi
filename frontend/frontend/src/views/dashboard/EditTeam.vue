@@ -29,6 +29,13 @@
             </div>
 
             <div class="field">
+                <label>Bankaccount</label>
+                <div class="control">
+                    <input type="number" class="input" v-model="team.bankaccount">
+                </div>
+            </div>
+
+            <div class="field">
                     <div class="control">
                         <button class="button is-success" @click="submitForm">Save</button>
                     </div>
@@ -54,12 +61,12 @@ export default {
     methods: {
         getOrCreateTeam() {
             axios
-                .get('/api/v1/teams/')
+                .get(`/api/v1/teams/`)
                 .then(response => {
                     this.team = response.data[0]
                 })
                 .catch(error => {
-                    console.log(JSON.stringify(error))
+                    console.log(error)
                 })
         },
         submitForm() {

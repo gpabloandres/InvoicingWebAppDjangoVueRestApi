@@ -1,9 +1,9 @@
+from django.core.exceptions import PermissionDenied
+
 from rest_framework import viewsets 
 
 from .serializers import InvoiceSerializer, ItemSerializer
 from .models import Invoice, Item
-
-from django.core.exceptions import PermissionDenied
 
 
 class InvoiceViewSet(viewsets.ModelViewSet):
@@ -19,7 +19,7 @@ class InvoiceViewSet(viewsets.ModelViewSet):
         team.first_invoice_number = invoice_number + 1
         team.save()
         
-        serializer.save(created_by=self.request.user, team=team, modified_by=self.request.user, invoice_number=invoice_number)
+        serializer.save(created_by=self.request.user, team=team, modified_by=self.request.user, invoice_number=invoice_number, bankaccount=team.bankaccount)
     
     def perform_update(self, serializer):
         obj = self.get_object()
@@ -28,12 +28,3 @@ class InvoiceViewSet(viewsets.ModelViewSet):
             raise PermissionDenied('Wrong object owner')
     
         serializer.save()
-
-class ItemViewSet(viewsets.ModelViewSet):
-    serializer_class = ItemSerializer
-    queryset = Item.objects.all()
-    
-    def get_queryset(self):
-        invoice_id = self.request.GET.get('incvoice_id', 0)
-        
-        return self.queryset.filter(invoice__id=invoice_id)
